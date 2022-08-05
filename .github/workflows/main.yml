@@ -12,4 +12,4 @@ jobs:
 
     steps:
       - uses: actions/checkout@123456789
-        run: echo "Hello World"
+      - run: echo "Hello World"
