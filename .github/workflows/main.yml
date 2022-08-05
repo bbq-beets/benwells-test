@@ -12,4 +12,5 @@ jobs:
 
     steps:
       - uses: actions/checkout@123456789
-      - run: echo "Hello World"
+      - name: Install dependencies
+        run: echo "Hello World"
