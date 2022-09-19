@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: View context attributes
       - uses: actions/github-script@v6
+      - name: View context attributes
         with:
           script: console.log("testing123", context)
