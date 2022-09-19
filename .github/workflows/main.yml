@@ -11,6 +11,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@123456789
-      - name: Install dependencies
-        run: echo "Hello World"
+      - name: View context attributes
+      - uses: actions/github-script@v6
+        with:
+          script: console.log("testing123", context)
