@@ -17,11 +17,4 @@ jobs:
           slack-channel: benwells-test-channel-public
           team-members: tingluohuang,fhammerl,avastancu,cory-miller,link-,rentziass,vanzeben
           slack-webhook-url: ${{ secrets.STANDUP_ORDER_SLACK_WEBHOOK }}
-      - uses: luketomlinson/standup-order@main
-        with:
-          prepend-message: "Today's Four Nines standup driver is:"
-          number-of-people: 1
-          icon-emoji: ':car:'
-          slack-channel: benwells-test-channel-public
-          team-members: thboop,luketomlinson,pje,lokesh755,takost,vmjoseph,joannaakl
-          slack-webhook-url: ${{ secrets.STANDUP_ORDER_SLACK_WEBHOOK }}
+      
