@@ -1,16 +1,27 @@
-name: Test
-
+name: 'Generate Standup Order Test'
 on:
-  push:
-    branches:
-      - main
   workflow_dispatch:
+  schedule:
+    - cron: '0 13 * * 2,3,4'
 
 jobs:
-  check-dist:
+  standup-order:
     runs-on: ubuntu-latest
-
     steps:
-      - uses: benwells/github-script@main
+      - uses: actions/checkout@v2
+      - uses: luketomlinson/standup-order@main
         with:
-          script: console.log("testing123", context)
+          prepend-message: "Today's ARC standup driver is:"
+          number-of-people: 1
+          icon-emoji: ':car:'
+          slack-channel: benwells-test-channel
+          team-members: tingluohuang,fhammerl,avastancu,cory-miller,link-,rentziass,vanzeben
+          slack-webhook-url: ${{ secrets.STANDUP_ORDER_SLACK_WEBHOOK }}
+      - uses: luketomlinson/standup-order@main
+        with:
+          prepend-message: "Today's Four Nines standup driver is:"
+          number-of-people: 1
+          icon-emoji: ':car:'
+          slack-channel: benwells-test-channel
+          team-members: thboop,luketomlinson,pje,lokesh755,takost,vmjoseph,joannaakl
+          slack-webhook-url: ${{ secrets.STANDUP_ORDER_SLACK_WEBHOOK }}
