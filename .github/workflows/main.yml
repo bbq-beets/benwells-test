@@ -1,20 +1,19 @@
-name: 'Generate Standup Order Test'
+
+# When issues are added to this repo they will automatically get classified by label and added to various project boards
+name: "Issue to Project Board Automation"
 on:
   workflow_dispatch:
-  schedule:
-    - cron: '0 13 * * 2,3,4'
-
+  issues:
+    types: [opened, labeled]
 jobs:
-  standup-order:
+  categorize_project_issues:
+    name: Add issue to project
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: luketomlinson/standup-order@main
-        with:
-          prepend-message: "Today's ARC standup driver is:"
-          number-of-people: 1
-          icon-emoji: ':car:'
-          slack-channel: benwells-test-channel-public
-          team-members: tingluohuang,fhammerl,avastancu,cory-miller,link-,rentziass,vanzeben
-          slack-webhook-url: ${{ secrets.STANDUP_ORDER_SLACK_WEBHOOK }}
-      
+    - name: 'Add to "pe-actions-runtime" "Needs Triage"'
+      uses: konradpabjan/actions-add-new-issue-to-column@v1.1
+      if: contains(github.event.issue.labels.*.name, 'compute-runtime')
+      with:
+        action-token: ${{ secrets.PROJECT_TOKEN }}
+        project-url: "https://github.com/orgs/github/projects/7807"
+        column-name: "Needs Triage"
