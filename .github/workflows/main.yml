@@ -6,14 +6,15 @@ on:
   issues:
     types: [opened, labeled]
 jobs:
-  categorize_project_issues:
+  add-to-project:
     name: Add issue to project
     runs-on: ubuntu-latest
     steps:
-    - name: 'Add to "pe-actions-runtime" "Needs Triage"'
-      uses: konradpabjan/actions-add-new-issue-to-column@v1.1
-      if: contains(github.event.issue.labels.*.name, 'compute-runtime')
-      with:
-        action-token: ${{ secrets.PROJECT_TOKEN }}
-        project-url: "https://github.com/orgs/github/projects/7807"
-        column-name: "Needs Triage"
+      - uses: actions/add-to-project@v0.3.0
+        with:
+
+          project-url: https://github.com/orgs/github/projects/7807
+          github-token: ${{ secrets.PROJECT_TOKEN }}
+          labeled: compute-runtime
+          label-operator: OR
+  
